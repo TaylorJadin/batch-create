@@ -10,4 +10,4 @@ Batch create is designed for quickly creating sites and/or usernames or adding u
 - The CSV template is tweaked a bit.
 
 ## Installation
-Download this repository as a zip file, and upload it from the WordPress plugins page.
+Download this repository as a zip file, and upload it using the WordPress plugins page.
