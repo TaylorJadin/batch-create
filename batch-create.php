@@ -2,7 +2,7 @@
 /*
 Plugin Name: Batch Create
 Plugin URI: https://github.com/taylorjadin/batch-create/
-Description: Create hundred or thousands of blogs and users automatically by simply uploading a csv text file. Slightly tweaked and updated from the WPMU Dev Batch Create plugin.
+Description: Create sites and/or users or add users to existing sites by uloading a CSV file. Tweaked and updated from the WPMU Dev Batch Create plugin.
 Author: Taylor Jadin
 Text Domain: incsub_batch_create
 Version: 2.0

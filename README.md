@@ -1,6 +1,6 @@
 # Batch Create
 
-Batch create is designed for quickly creating sites and/or usernames or adding users to an existing site in batches by uploading a CSV file. Slightly tweaked and updated from the [WPMU Dev Batch Create plugin](https://github.com/wpmudev/batch-create/).
+Create sites and/or users or add users to existing sites by uloading a CSV file. Tweaked and updated from the [WPMU Dev Batch Create plugin](https://github.com/wpmudev/batch-create/).
 
 Differences from the defunct WPMU plugin:
 - This works on modern WordPress and PHP as of writing this (WP 6.1.1 and PHP 8)
