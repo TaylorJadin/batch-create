@@ -286,7 +286,8 @@ class Incsub_Batch_Create_Creator {
 
 		// USER
 		$user_name = $queue_item->batch_create_user_name;
-		$user = get_user_by( 'login', $queue_item->batch_create_user_name );
+		$user = get_user_by( 'email', $queue_item->batch_create_user_email );
+		$this->log( "290 $user->ID" );
 		if ( ! empty( $user ) ) {
 			$this->log( sprintf( 'User %s already exists (ID: %d)', $queue_item->batch_create_user_name, $user->ID ) );
 			$user_id = $user->ID;
