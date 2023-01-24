@@ -65,12 +65,11 @@ if ( is_plugin_active_for_network( 'pro-sites/pro-sites.php' ) ) {
 	add_filter( 'batch_create_display_queue_column', 'batch_create_display_pro_sites_columns', 10, 3 );
 
 	function batch_create_add_pro_sites_instructions() {
-		$test_xls_url = INCSUB_BATCH_CREATE_PLUGIN_URL . 'inc/test_pro.xls'; 
 		$test_csv_url = INCSUB_BATCH_CREATE_PLUGIN_URL . 'inc/test_pro.csv'; 
 		?>
 			<h3><?php _e( 'Pro Sites Integration', INCSUB_BATCH_CREATE_LANG_DOMAIN ); ?></h3>
 			<p><?php _e( 'Batch Create allows you to add new columns in the Excel/CSV file to specify the Pro Site level and the expiration date. Here is an example: ', INCSUB_BATCH_CREATE_LANG_DOMAIN ); ?></p>
-			<p><?php printf( __( 'Download <a href="%s">this .xls</a> or <a href="%s">this .csv</a> file and use it as a template to create your batch file with Pro Sites columns.', INCSUB_BATCH_CREATE_LANG_DOMAIN ), $test_xls_url, $test_csv_url ); ?></p>
+			<p><?php printf( __( 'Download <a href="%s">this .csv</a> file and use it as a template to create your batch file with Pro Sites columns.', INCSUB_BATCH_CREATE_LANG_DOMAIN ), $test_csv_url ); ?></p>
 			<p><img width="650" src="<?php echo INCSUB_BATCH_CREATE_ASSETS_URL . 'images/batchcreatepro.jpg'; ?>" /></p>
 		<?php
 	}

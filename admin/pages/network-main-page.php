@@ -30,7 +30,6 @@ class Batch_Create_Network_Main_Menu extends Origin_Admin_Page {
 				Incsub_Batch_Create_Errors_Handler::show_updated_notice( $message );
 			}
 
-			$test_xls_url = INCSUB_BATCH_CREATE_PLUGIN_URL . 'inc/test.xls'; 
 			$test_csv_url = INCSUB_BATCH_CREATE_PLUGIN_URL . 'inc/template.csv'; 
 
 			$form_url = add_query_arg(

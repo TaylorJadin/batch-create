@@ -44,7 +44,7 @@ class Incsub_Batch_Create_Creator {
 		}
 
 		$file_extension = end( explode( '.', $file_name ) );
-		if( ! in_array( $file_extension, array( 'csv', 'xls' ) ) ) {
+		if( ! in_array( $file_extension, array( 'csv', 'CSV' ) ) ) {
 			Incsub_Batch_Create_Errors_Handler::add_error( 'file_type', __( 'The file type you uploaded is not supported. Please upload a .csv file.', INCSUB_BATCH_CREATE_LANG_DOMAIN ) );
 			return false;
 		}
@@ -72,27 +72,6 @@ class Incsub_Batch_Create_Creator {
 			fclose( $handle );
 
 		} 
-		elseif( 'xls' == $file_extension ) { // if xls file
-
-			fclose( $handle );
-
-			require_once( INCSUB_BATCH_CREATE_INCLUDES_DIR . 'excel/reader.php' );
-
-			$data = new Spreadsheet_Excel_Reader();
-			$data->setOutputEncoding( 'CP1251' );
-			$data->read( $file_path );
-
-			for ( $i = 1; $i <= $data->sheets[0]['numRows']; $i++ ) {
-				$tmp_cols = array();
-				for ( $j = 1; $j <= $data->sheets[0]['numCols']; $j++ ) {
-					if( isset( $data->sheets[0]['cells'][$i][$j] ) ) {
-						$tmp_cols[$j] = $data->sheets[0]['cells'][$i][$j]; // Index the result array
-					} else $tmp_cols[$j] = ''; // Pad the result array -  this handles empty fields in the XLS
-				}
-				if ( ! empty( $tmp_cols[1] ) )
-					$tmp_new_blogs[] = $tmp_cols;
-			}
-		}
 
 		if ( ! $first_column )
 			array_shift( $tmp_new_blogs );
