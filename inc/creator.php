@@ -288,7 +288,7 @@ class Incsub_Batch_Create_Creator {
 		$user_name = $queue_item->batch_create_user_name;
 		$user = get_user_by( 'email', $email );
 		if ( ! empty( $user ) ) {
-			$this->log( sprintf( 'Email %s exists (ID: %d)', $queue_item->batch_create_user_email, $user->ID ) );
+			$this->log( sprintf( 'Email %s exists (ID: %d)', $email, $user->ID ) );
 			$user_id = $user->ID;
 		}
 		else {
