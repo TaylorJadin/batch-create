@@ -1,6 +1,6 @@
 # Batch Create
 
-Create a bunch of blogs and / or users automatically, or add existing users to blogs by simply uploading a CSV file. Slightly tweaked and updated from the [WPMU Dev Batch Create plugin](https://github.com/wpmudev/batch-create/).
+Batch create is designed for quickly creating sites and/or usernames or adding users to an existing site in batches by uploading a CSV file. Slightly tweaked and updated from the [WPMU Dev Batch Create plugin](https://github.com/wpmudev/batch-create/).
 
 Differences from the defunct WPMU plugin:
 - This works on modern WordPress and PHP as of writing this (WP 6.1.1 and PHP 8)

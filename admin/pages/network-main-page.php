@@ -239,7 +239,7 @@ class Batch_Create_Network_Main_Menu extends Origin_Admin_Page {
 		$test_csv_url = INCSUB_BATCH_CREATE_PLUGIN_URL . '/inc/template.csv';
 		?>
 			<h3><?php _e( 'Instructions', INCSUB_BATCH_CREATE_LANG_DOMAIN ); ?></h3>
-			<p><?php _e( "Batch create is designed for quickly creating sites and/or usernames or adding users to an existing site in batches by uploading a .csv file.", INCSUB_BATCH_CREATE_LANG_DOMAIN ); ?></p>
+			<p><?php _e( "Batch create is designed for quickly creating sites and/or usernames or adding users to an existing site in batches by uploading a CSV file.", INCSUB_BATCH_CREATE_LANG_DOMAIN ); ?></p>
 
 			<ol>
 				<li><?php printf( __( 'Download <a href="%s">this .csv</a> file and use it as a template to create your batch file.'), $test_csv_url ); ?></li>
