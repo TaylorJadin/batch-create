@@ -294,11 +294,11 @@ class Incsub_Batch_Create_Creator {
 
 			do_action( 'wpmu_new_user', $user_id );
 
-			$send = true;
-			$send = apply_filters( 'batch_create_send_new_user_notification', $send, $user_id );
+			// $send = true;
+			// $send = apply_filters( 'batch_create_send_new_user_notification', $send, $user_id );
 
-			if ( $send )
-				wpmu_welcome_user_notification( $user_id, $password );
+			// if ( $send )
+			//	wpmu_welcome_user_notification( $user_id, $password );
 
 			$this->log( "User: $user_name created!" );
 			do_action( 'batch_create_after_create_user', $queue_item, $user_id );
@@ -434,10 +434,10 @@ class Incsub_Batch_Create_Creator {
 			    add_user_to_blog( $blog_id, $user_id, $user_role );
             }
 
-			$send = apply_filters( 'batch_create_send_welcome_notification', true, $blog_id );
+			//$send = apply_filters( 'batch_create_send_welcome_notification', true, $blog_id );
 
-			if ( ! empty( $password ) && $send )
-				wpmu_welcome_notification( $blog_id, $admin_id, $password, $blog_title, array( 'public' => 1 ) );
+			//if ( ! empty( $password ) && $send )
+			//	wpmu_welcome_notification( $blog_id, $admin_id, $password, $blog_title, array( 'public' => 1 ) );
 
 			$this->log( 'Blog: ' . $newdomain . $path . ' created!' );
 		}
