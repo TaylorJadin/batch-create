@@ -10,4 +10,4 @@ Create sites and/or users or add users to existing sites by uloading a CSV file.
 - The CSV template is tweaked a bit.
 
 ## Installation
-Download this repository as a zip file, and upload it using the WordPress plugins page.
+Download this repository as a zip file, and upload the zip to WordPress.
