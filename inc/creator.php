@@ -315,7 +315,7 @@ class Incsub_Batch_Create_Creator {
 
 			do_action( 'wpmu_new_user', $user_id );
 
-			$send = true;
+			$send = false;
 			$send = apply_filters( 'batch_create_send_new_user_notification', $send, $user_id );
 
 			if ( $send )
