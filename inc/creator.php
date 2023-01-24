@@ -374,7 +374,7 @@ class Incsub_Batch_Create_Creator {
 		if( $blog_id ) { 
 
 			// blog exists
-			$this->log( sprintf( __( 'Blog (%s) already exists (%d), user can be added', INCSUB_BATCH_CREATE_LANG_DOMAIN ), $newdomain, $blog_id ), 'debug');
+			$this->log( sprintf( __( 'Blog %s%s already exists (%d), user can be added', INCSUB_BATCH_CREATE_LANG_DOMAIN ), $newdomain, $path, $blog_id ), 'debug');
 
 			if ( empty( $user_role ) ) {
 				$this->log( __( "User role empty. The user could not have been added to the blog", INCSUB_BATCH_CREATE_LANG_DOMAIN ) );
@@ -383,19 +383,19 @@ class Incsub_Batch_Create_Creator {
 
 			if( ! empty( $user_role ) && add_user_to_blog( $blog_id, $user_id, $user_role ) ) { 
 				// add user to blog
-				$this->log( __( "User $user_name successfully added to blog {$newdomain}{$path}",INCSUB_BATCH_CREATE_LANG_DOMAIN ) );
+				$this->log( __( "User $user_name successfully added to {$newdomain}{$path}",INCSUB_BATCH_CREATE_LANG_DOMAIN ) );
 				do_action( 'batch_create_user_added_to_blog', $blog_id, $user_id, $user_role, $queue_item );
 			} 
 			else {
-				$this->log( sprintf( __( 'Blog (%s) does NOT already exist, not adding user at this point', INCSUB_BATCH_CREATE_LANG_DOMAIN ), $newdomain ), 'debug');
-				$this->log( __( "Unable to add user $batch_create_user_name to blog {$newdomain}{$path}", INCSUB_BATCH_CREATE_LANG_DOMAIN ) );
+				$this->log( sprintf( __( 'Blog %s%s does NOT already exist, not adding user at this point', INCSUB_BATCH_CREATE_LANG_DOMAIN ), $newdomain, $path ), 'debug');
+				$this->log( __( "Unable to add user $batch_create_user_name to {$newdomain}{$path}", INCSUB_BATCH_CREATE_LANG_DOMAIN ) );
 				return false;
 			}
 
 
 		}
 		else {
-			$this->log( sprintf( __( "Blog (%s) does NOT exist yet", INCSUB_BATCH_CREATE_LANG_DOMAIN ), $newdomain ), 'debug');
+			$this->log( sprintf( __( "Blog %s%s does NOT exist yet", INCSUB_BATCH_CREATE_LANG_DOMAIN ), $newdomain, $path ), 'debug');
 		}
 
 		$blog_title = $queue_item->batch_create_blog_title;
