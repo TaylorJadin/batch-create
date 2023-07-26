@@ -44,8 +44,8 @@ class Incsub_Batch_Create_Creator {
 		}
 
 		$file_extension = end( explode( '.', $file_name ) );
-		if( ! in_array( $file_extension, array( 'csv', 'xls' ) ) ) {
-			Incsub_Batch_Create_Errors_Handler::add_error( 'file_type', __( 'The file type you uploaded is not supported. Please upload a .csv or .xls file.', INCSUB_BATCH_CREATE_LANG_DOMAIN ) );
+		if( ! in_array( $file_extension, array( 'csv', 'CSV' ) ) ) {
+			Incsub_Batch_Create_Errors_Handler::add_error( 'file_type', __( 'The file type you uploaded is not supported. Please upload a .csv file.', INCSUB_BATCH_CREATE_LANG_DOMAIN ) );
 			return false;
 		}
 
@@ -72,27 +72,6 @@ class Incsub_Batch_Create_Creator {
 			fclose( $handle );
 
 		} 
-		elseif( 'xls' == $file_extension ) { // if xls file
-
-			fclose( $handle );
-
-			require_once( INCSUB_BATCH_CREATE_INCLUDES_DIR . 'excel/reader.php' );
-
-			$data = new Spreadsheet_Excel_Reader();
-			$data->setOutputEncoding( 'CP1251' );
-			$data->read( $file_path );
-
-			for ( $i = 1; $i <= $data->sheets[0]['numRows']; $i++ ) {
-				$tmp_cols = array();
-				for ( $j = 1; $j <= $data->sheets[0]['numCols']; $j++ ) {
-					if( isset( $data->sheets[0]['cells'][$i][$j] ) ) {
-						$tmp_cols[$j] = $data->sheets[0]['cells'][$i][$j]; // Index the result array
-					} else $tmp_cols[$j] = ''; // Pad the result array -  this handles empty fields in the XLS
-				}
-				if ( ! empty( $tmp_cols[1] ) )
-					$tmp_new_blogs[] = $tmp_cols;
-			}
-		}
 
 		if ( ! $first_column )
 			array_shift( $tmp_new_blogs );
@@ -286,9 +265,9 @@ class Incsub_Batch_Create_Creator {
 
 		// USER
 		$user_name = $queue_item->batch_create_user_name;
-		$user = get_user_by( 'login', $queue_item->batch_create_user_name );
+		$user = get_user_by( 'email', $email );
 		if ( ! empty( $user ) ) {
-			$this->log( sprintf( 'User %s already exists (ID: %d)', $queue_item->batch_create_user_name, $user->ID ) );
+			$this->log( sprintf( 'Email %s exists (ID: %d)', $email, $user->ID ) );
 			$user_id = $user->ID;
 		}
 		else {
@@ -315,11 +294,11 @@ class Incsub_Batch_Create_Creator {
 
 			do_action( 'wpmu_new_user', $user_id );
 
-			$send = false;
-			$send = apply_filters( 'batch_create_send_new_user_notification', $send, $user_id );
+			// $send = true;
+			// $send = apply_filters( 'batch_create_send_new_user_notification', $send, $user_id );
 
-			if ( $send )
-				wpmu_welcome_user_notification( $user_id, $password );
+			// if ( $send )
+			//	wpmu_welcome_user_notification( $user_id, $password );
 
 			$this->log( "User: $user_name created!" );
 			do_action( 'batch_create_after_create_user', $queue_item, $user_id );
@@ -374,7 +353,7 @@ class Incsub_Batch_Create_Creator {
 		if( $blog_id ) { 
 
 			// blog exists
-			$this->log( sprintf( __( 'Blog (%s) already exists (%d), user can be added', INCSUB_BATCH_CREATE_LANG_DOMAIN ), $newdomain, $blog_id ), 'debug');
+			$this->log( sprintf( __( 'Blog %s%s already exists (%d), user can be added', INCSUB_BATCH_CREATE_LANG_DOMAIN ), $newdomain, $path, $blog_id ), 'debug');
 
 			if ( empty( $user_role ) ) {
 				$this->log( __( "User role empty. The user could not have been added to the blog", INCSUB_BATCH_CREATE_LANG_DOMAIN ) );
@@ -383,19 +362,19 @@ class Incsub_Batch_Create_Creator {
 
 			if( ! empty( $user_role ) && add_user_to_blog( $blog_id, $user_id, $user_role ) ) { 
 				// add user to blog
-				$this->log( __( "User $user_name successfully added to blog {$newdomain}{$path}",INCSUB_BATCH_CREATE_LANG_DOMAIN ) );
+				$this->log( __( "User $user_name successfully added to {$newdomain}{$path}",INCSUB_BATCH_CREATE_LANG_DOMAIN ) );
 				do_action( 'batch_create_user_added_to_blog', $blog_id, $user_id, $user_role, $queue_item );
 			} 
 			else {
-				$this->log( sprintf( __( 'Blog (%s) does NOT already exist, not adding user at this point', INCSUB_BATCH_CREATE_LANG_DOMAIN ), $newdomain ), 'debug');
-				$this->log( __( "Unable to add user $batch_create_user_name to blog {$newdomain}{$path}", INCSUB_BATCH_CREATE_LANG_DOMAIN ) );
+				$this->log( sprintf( __( 'Blog %s%s does NOT already exist, not adding user at this point', INCSUB_BATCH_CREATE_LANG_DOMAIN ), $newdomain, $path ), 'debug');
+				$this->log( __( "Unable to add user $batch_create_user_name to {$newdomain}{$path}", INCSUB_BATCH_CREATE_LANG_DOMAIN ) );
 				return false;
 			}
 
 
 		}
 		else {
-			$this->log( sprintf( __( "Blog (%s) does NOT exist yet", INCSUB_BATCH_CREATE_LANG_DOMAIN ), $newdomain ), 'debug');
+			$this->log( sprintf( __( "Blog %s%s does NOT exist yet", INCSUB_BATCH_CREATE_LANG_DOMAIN ), $newdomain, $path ), 'debug');
 		}
 
 		$blog_title = $queue_item->batch_create_blog_title;
@@ -455,10 +434,10 @@ class Incsub_Batch_Create_Creator {
 			    add_user_to_blog( $blog_id, $user_id, $user_role );
             }
 
-			$send = apply_filters( 'batch_create_send_welcome_notification', true, $blog_id );
+			//$send = apply_filters( 'batch_create_send_welcome_notification', true, $blog_id );
 
-			if ( ! empty( $password ) && $send )
-				wpmu_welcome_notification( $blog_id, $admin_id, $password, $blog_title, array( 'public' => 1 ) );
+			//if ( ! empty( $password ) && $send )
+			//	wpmu_welcome_notification( $blog_id, $admin_id, $password, $blog_title, array( 'public' => 1 ) );
 
 			$this->log( 'Blog: ' . $newdomain . $path . ' created!' );
 		}

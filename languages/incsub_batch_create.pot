@@ -86,7 +86,7 @@ msgstr ""
 
 #: admin/pages/network-main-page.php:246
 msgid ""
-"Download <a href=\"%s\">this .xls</a> or <a href=\"%s\">this .csv</a> file "
+"Download <a href=\"%s\">this .csv</a> file "
 "and use it as a template to create your batch file."
 msgstr ""
 
@@ -353,7 +353,7 @@ msgstr ""
 
 #: inc/creator.php:48
 msgid ""
-"The file type you uploaded is not supported. Please upload a .csv or .xls "
+"The file type you uploaded is not supported. Please upload a .csv"
 "file."
 msgstr ""
 
